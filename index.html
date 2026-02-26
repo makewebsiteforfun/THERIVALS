@@ -1,0 +1,2066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Order | DikaStudios:GameVerse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="icon" href="cover.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Rye&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Western Desert Background - Golden Hour Sunset Theme */
+        .western-bg {
+            background: linear-gradient(180deg,
+                #1a0a2e 0%,      /* Deep purple night sky at top */
+                #2d1b4e 10%,    /* Purple twilight */
+                #4a2c6a 20%,    /* Lavender dusk */
+                #8b4a6a 35%,    /* Pink sunset */
+                #d4724a 50%,    /* Orange sunset */
+                #e8a86a 65%,    /* Golden sand */
+                #d4a574 80%,    /* Warm tan */
+                #c19a6b 95%     /* Desert camel */
+            );
+            position: relative;
+        }
+        
+        /* Animated sky gradient overlay */
+        .western-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(180deg, 
+                rgba(255, 200, 100, 0.15) 0%,
+                rgba(255, 150, 50, 0.1) 50%,
+                transparent 100%
+            );
+            animation: skyGlow 8s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+        
+        @keyframes skyGlow {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        /* Desert floor with animated sand effect */
+        .desert-floor {
+            background: 
+                linear-gradient(180deg, transparent 0%, rgba(139, 69, 19, 0.2) 100%),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(205, 133, 63, 0.15) 2px,
+                    rgba(205, 133, 63, 0.15) 4px
+                ),
+                linear-gradient(180deg, #8b4513 0%, #a0522d 50%, #cd853f 100%);
+            position: relative;
+        }
+        
+        /* Animated sand dunes */
+        .sand-dune {
+            position: absolute;
+            width: 200%;
+            height: 100px;
+            bottom: 0;
+            pointer-events: none;
+        }
+        
+        .sand-dune-1 {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath fill='%23d4a574' d='M0,60 C200,120 400,0 600,60 C800,120 1000,0 1200,60 L1200,120 L0,120 Z'/%3E%3C/svg%3E") repeat-x;
+            background-size: 600px 100%;
+            animation: duneMove 20s linear infinite;
+            bottom: 0;
+            opacity: 0.8;
+        }
+        
+        .sand-dune-2 {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath fill='%23c19a6b' d='M0,60 C150,100 350,20 550,60 C750,100 950,20 1150,60 L1200,80 L0,80 Z'/%3E%3C/svg%3E") repeat-x;
+            background-size: 500px 100%;
+            animation: duneMove 25s linear infinite;
+            bottom: 20px;
+            opacity: 0.6;
+        }
+        
+        .sand-dune-3 {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath fill='%23b8956a' d='M0,80 C180,40 420,100 600,60 C780,20 1020,100 1200,60 L1200,120 L0,120 Z'/%3E%3C/svg%3E") repeat-x;
+            background-size: 700px 100%;
+            animation: duneMove 30s linear infinite;
+            bottom: 40px;
+            opacity: 0.4;
+        }
+        
+        @keyframes duneMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        /* Heat shimmer effect */
+        .heat-shimmer {
+            position: absolute;
+            bottom: 30%;
+            left: 0;
+            right: 0;
+            height: 30%;
+            background: linear-gradient(180deg, transparent, rgba(255,200,100,0.05), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: scaleY(1); opacity: 0.3; }
+            50% { transform: scaleY(1.5); opacity: 0.6; }
+        }
+        
+        /* Wood texture for panels */
+        .wood-texture {
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    #3d2314 0px,
+                    #4a2c1a 2px,
+                    #5c3a24 4px,
+                    #3d2314 8px
+                ),
+                linear-gradient(180deg, #5c3a24 0%, #3d2314 100%);
+            background-blend-mode: multiply;
+        }
+        
+        /* Wanted poster style */
+        .wanted-paper {
+            background: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23d2b48c' width='100' height='100'/%3E%3Crect fill='%23c4a882' x='0' y='0' width='50' height='50'/%3E%3Crect fill='%23c4a882' x='50' y='50' width='50' height='50'/%3E%3C/svg%3E"),
+                linear-gradient(180deg, #e8dcc8 0%, #d2b48c 100%);
+            background-blend-mode: multiply;
+        }
+        
+        /* Improved Sand particle */
+        .sand-particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 220, 150, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sandFloat 12s infinite linear;
+            box-shadow: 0 0 4px rgba(255, 200, 100, 0.5);
+        }
+        
+        @keyframes sandFloat {
+            0% { 
+                transform: translateX(0) translateY(0) translateZ(0); 
+                opacity: 0; 
+            }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { 
+                transform: translateX(100px) translateY(-120vh) translateZ(50px); 
+                opacity: 0; 
+            }
+        }
+        
+        /* Larger wind-blown sand */
+        .wind-sand {
+            position: absolute;
+            width: 4px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,200,100,0.6), transparent);
+            pointer-events: none;
+            animation: windSand 8s infinite linear;
+        }
+        
+        @keyframes windSand {
+            0% { transform: translateX(-50px) translateY(0); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateX(calc(100vw + 50px)) translateY(-50px); opacity: 0; }
+        }
+        
+        /* Fireflies for magical touch */
+        .firefly {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ffd700, 0 0 20px #ff8c00;
+            animation: firefly 4s ease-in-out infinite;
+            opacity: 0;
+        }
+        
+        @keyframes firefly {
+            0%, 100% { 
+                opacity: 0; 
+                transform: translateY(0) translateX(0); 
+            }
+            25% { 
+                opacity: 1; 
+                transform: translateY(-20px) translateX(10px); 
+            }
+            50% { 
+                opacity: 0.5; 
+                transform: translateY(-40px) translateX(-10px); 
+            }
+            75% { 
+                opacity: 1; 
+                transform: translateY(-20px) translateX(15px); 
+            }
+        }
+        
+        /* Animated Palm Tree */
+        .palm-tree {
+            position: absolute;
+            bottom: 0;
+            transform-origin: bottom center;
+            animation: palmSway 6s ease-in-out infinite;
+        }
+        
+        .palm-trunk {
+            width: 12px;
+            height: 150px;
+            background: linear-gradient(90deg, #4a3520 0%, #6b4423 50%, #4a3520 100%);
+            border-radius: 5px;
+            position: relative;
+            margin: 0 auto;
+        }
+        
+        .palm-trunk::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 10px,
+                rgba(0,0,0,0.1) 10px,
+                rgba(0,0,0,0.1) 12px
+            );
+            border-radius: 5px;
+        }
+        
+        .palm-fronds {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 60px;
+        }
+        
+        .palm-frond {
+            position: absolute;
+            width: 60px;
+            height: 25px;
+            background: linear-gradient(90deg, #2d5a3d 0%, #3d7a4d 50%, #2d5a3d 100%);
+            border-radius: 0 100% 0 100%;
+            transform-origin: left center;
+        }
+        
+        .palm-frond:nth-child(1) { transform: rotate(-80deg); top: 20px; left: 30px; }
+        .palm-frond:nth-child(2) { transform: rotate(-50deg); top: 10px; left: 35px; }
+        .palm-frond:nth-child(3) { transform: rotate(-20deg); top: 5px; left: 40px; }
+        .palm-frond:nth-child(4) { transform: rotate(10deg); top: 5px; left: 45px; animation: frondWave 3s ease-in-out infinite; }
+        .palm-frond:nth-child(5) { transform: rotate(40deg); top: 10px; left: 50px; animation: frondWave 3s ease-in-out infinite 0.5s; }
+        .palm-frond:nth-child(6) { transform: rotate(70deg); top: 20px; left: 55px; animation: frondWave 3s ease-in-out infinite 1s; }
+        .palm-frond:nth-child(7) { transform: rotate(90deg); top: 25px; left: 58px; animation: frondWave 3s ease-in-out infinite 1.5s; }
+        
+        @keyframes palmSway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+        
+        @keyframes frondWave {
+            0%, 100% { transform: rotate(var(--base-rotation, 0deg)); }
+            50% { transform: rotate(calc(var(--base-rotation, 0deg) + 10deg)); }
+        }
+        
+        /* Palm tree shadows */
+        .palm-shadow {
+            position: absolute;
+            bottom: -10px;
+            width: 80px;
+            height: 20px;
+            background: radial-gradient(ellipse, rgba(0,0,0,0.3) 0%, transparent 70%);
+            animation: shadowPulse 6s ease-in-out infinite;
+        }
+        
+        @keyframes shadowPulse {
+            0%, 100% { transform: scaleX(1); opacity: 0.5; }
+            50% { transform: scaleX(1.1); opacity: 0.3; }
+        }
+        
+        /* Cactus silhouette - improved */
+        .cactus {
+            position: absolute;
+            bottom: 0;
+            width: 30px;
+            height: 100px;
+            background: linear-gradient(180deg, #1a0f08 0%, #0d0804 100%);
+            border-radius: 15px 15px 0 0;
+            opacity: 0.7;
+            animation: cactusSway 8s ease-in-out infinite;
+            transform-origin: bottom center;
+        }
+        
+        .cactus::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: -18px;
+            width: 20px;
+            height: 40px;
+            background: linear-gradient(90deg, #1a0f08 0%, #0d0804 100%);
+            border-radius: 10px 0 0 10px;
+            transform: rotate(-25deg);
+            animation: armSway1 8s ease-in-out infinite;
+            transform-origin: top right;
+        }
+        
+        .cactus::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            right: -15px;
+            width: 18px;
+            height: 35px;
+            background: linear-gradient(90deg, #0d0804 0%, #1a0f08 100%);
+            border-radius: 0 10px 10px 0;
+            transform: rotate(20deg);
+            animation: armSway2 6s ease-in-out infinite;
+            transform-origin: top left;
+        }
+        
+        @keyframes cactusSway {
+            0%, 100% { transform: rotate(-1deg); }
+            50% { transform: rotate(1deg); }
+        }
+        
+        @keyframes armSway1 {
+            0%, 100% { transform: rotate(-25deg); }
+            50% { transform: rotate(-20deg); }
+        }
+        
+        @keyframes armSway2 {
+            0%, 100% { transform: rotate(20deg); }
+            50% { transform: rotate(25deg); }
+        }
+        
+        /* Mountain silhouette - improved with layers */
+        .mountain {
+            position: absolute;
+            bottom: 80px;
+            width: 0;
+            height: 0;
+            border-left: 180px solid transparent;
+            border-right: 180px solid transparent;
+            border-bottom: 250px solid;
+            opacity: 0.5;
+            animation: mountainBreathe 10s ease-in-out infinite;
+        }
+        
+        .mountain-1 {
+            border-bottom-color: rgba(30, 15, 20, 0.6);
+            left: 2%;
+            animation-delay: 0s;
+        }
+        
+        .mountain-2 {
+            border-bottom-color: rgba(40, 20, 25, 0.5);
+            left: 20%;
+            transform: scale(1.3);
+            animation-delay: 1s;
+            z-index: 1;
+        }
+        
+        .mountain-3 {
+            border-bottom-color: rgba(25, 12, 18, 0.4);
+            right: 5%;
+            animation-delay: 2s;
+        }
+        
+        .mountain-4 {
+            border-bottom-color: rgba(35, 18, 22, 0.45);
+            right: 25%;
+            transform: scale(0.85);
+            animation-delay: 3s;
+            z-index: 1;
+        }
+        
+        .mountain-5 {
+            border-bottom-color: rgba(20, 10, 15, 0.35);
+            left: 45%;
+            transform: scale(0.6);
+            animation-delay: 4s;
+        }
+        
+        @keyframes mountainBreathe {
+            0%, 100% { transform: translateY(0) scale(var(--scale, 1)); }
+            50% { transform: translateY(-5px) scale(var(--scale, 1)); }
+        }
+        
+        /* Cowboy silhouette - improved */
+        .cowboy {
+            position: absolute;
+            bottom: 100px;
+            width: 35px;
+            height: 70px;
+            background: linear-gradient(180deg, #1a0f08 0%, #0d0804 100%);
+            border-radius: 15px 15px 5px 5px;
+            opacity: 0.4;
+            animation: cowboyRide 15s ease-in-out infinite;
+        }
+        
+        .cowboy::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 3px;
+            width: 28px;
+            height: 18px;
+            background: #1a0f08;
+            border-radius: 50%;
+        }
+        
+        .cowboy::after {
+            content: '';
+            position: absolute;
+            top: -18px;
+            left: -2px;
+            width: 38px;
+            height: 12px;
+            background: #1a0f08;
+            border-radius: 3px;
+        }
+        
+        @keyframes cowboyRide {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(10px) translateY(-2px); }
+            50% { transform: translateX(20px) translateY(0); }
+            75% { transform: translateX(10px) translateY(-1px); }
+        }
+        
+        /* Resource badge */
+        .resource-badge {
+            background: linear-gradient(135deg, #2d1810 0%, #4a2c2a 100%);
+            border: 2px solid #8b4513;
+            box-shadow: 
+                inset 0 1px 0 rgba(255,255,255,0.1),
+                0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #e8dcc8;
+        }
+        
+        .western-title {
+            font-family: 'Rye', serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #f4a460 0%, #cd853f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-effect {
+            background: rgba(45, 24, 16, 0.9);
+            backdrop-filter: blur(10px);
+            border: 2px solid #8b4513;
+            box-shadow: 
+                0 0 20px rgba(139, 69, 19, 0.3),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        
+        .video-container {
+            position: relative;
+            background: linear-gradient(135deg, #4a2c2a 0%, #2d1810 100%);
+            border: 3px solid #8b4513;
+        }
+        
+        .play-button {
+            transition: all 0.3s ease;
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px rgba(244, 164, 96, 0.5);
+        }
+        
+        .payment-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #3d2314 0%, #2d1810 100%);
+            border: 2px solid #8b4513;
+        }
+        
+        .payment-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(244, 164, 96, 0.2);
+            border-color: #f4a460;
+        }
+        
+        .pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(244, 164, 96, 0.6); }
+            70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(244, 164, 96, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(244, 164, 96, 0); }
+        }
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Stagger children animations */
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .stagger-children.active > *:nth-child(1) { animation: fadeInUp 0.6s ease forwards 0.1s; }
+        .stagger-children.active > *:nth-child(2) { animation: fadeInUp 0.6s ease forwards 0.2s; }
+        .stagger-children.active > *:nth-child(3) { animation: fadeInUp 0.6s ease forwards 0.3s; }
+        .stagger-children.active > *:nth-child(4) { animation: fadeInUp 0.6s ease forwards 0.4s; }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 3D Tilt Effect for Cards */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+        
+        .tilt-content {
+            transform: translateZ(20px);
+        }
+        
+        /* Magnetic Button Effect */
+        .magnetic {
+            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        /* Shimmer Loading Effect */
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        /* Button hover lift */
+        .btn-lift {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .btn-lift:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(244, 164, 96, 0.4);
+        }
+        
+        .btn-lift:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+        
+        /* Price tag bounce */
+        .price-bounce {
+            animation: priceBounce 2s ease infinite;
+        }
+        
+        @keyframes priceBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Form glow effect */
+        .form-glow {
+            position: relative;
+        }
+        
+        .form-glow::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, #f4a460, #cd853f, #f4a460);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            filter: blur(10px);
+        }
+        
+        .form-glow:focus-within::before {
+            opacity: 0.5;
+            animation: glowPulse 2s ease infinite;
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+        
+        /* Shake animation for errors */
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+        
+        /* Confetti canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        /* Nav scroll effect */
+        .nav-scrolled {
+            box-shadow: 0 4px 20px rgba(139, 69, 19, 0.5);
+            background: rgba(45, 24, 16, 0.98) !important;
+        }
+        
+        /* Input focus animations */
+        .input-animated {
+            transition: all 0.3s ease;
+            border: 2px solid #8b4513;
+            background: rgba(61, 35, 20, 0.8);
+            color: #e8dcc8;
+        }
+        
+        .input-animated:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(244, 164, 96, 0.2);
+            border-color: #f4a460;
+        }
+        
+        .input-animated::placeholder {
+            color: rgba(232, 220, 200, 0.5);
+        }
+        
+        /* Feature card icon bounce */
+        .icon-bounce {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .group:hover .icon-bounce {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        /* Resource icon styles */
+        .resource-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid;
+        }
+        
+        .resource-wood { background: #5c3a24; border-color: #8b4513; }
+        .resource-water { background: #4a90a4; border-color: #5cb3cc; }
+        .resource-meat { background: #8b3a3a; border-color: #a44; }
+        .resource-gold { background: #b8860b; border-color: #daa520; }
+        
+        /* Animated Desert Sun - Golden Hour */
+        .desert-sun {
+            position: absolute;
+            top: 8%;
+            right: 20%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, 
+                #fff8e7 0%,    
+                #ffd700 20%,
+                #ff8c00 50%,   
+                #ff6347 80%,   
+                transparent 100%
+            );
+            border-radius: 50%;
+            opacity: 0.9;
+            box-shadow: 
+                0 0 80px rgba(255, 200, 100, 0.8),
+                0 0 150px rgba(255, 150, 50, 0.5),
+                0 0 250px rgba(255, 100, 0, 0.3);
+            animation: sunPulse 4s ease-in-out infinite, sunFloat 10s ease-in-out infinite;
+        }
+        
+        .desert-sun::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: -30px;
+            right: -30px;
+            bottom: -30px;
+            background: radial-gradient(circle, rgba(255,200,100,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: sunGlow 3s ease-in-out infinite alternate;
+        }
+        
+        /* Sun rays */
+        .sun-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            animation: rotateRays 60s linear infinite;
+            pointer-events: none;
+        }
+        
+        .sun-ray {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 150px;
+            background: linear-gradient(180deg, rgba(255,200,100,0.6) 0%, transparent 100%);
+            transform-origin: center bottom;
+            animation: rayPulse 2s ease-in-out infinite;
+        }
+        
+        .sun-ray:nth-child(1) { transform: rotate(0deg) translateY(-140px); }
+        .sun-ray:nth-child(2) { transform: rotate(30deg) translateY(-140px); }
+        .sun-ray:nth-child(3) { transform: rotate(60deg) translateY(-140px); }
+        .sun-ray:nth-child(4) { transform: rotate(90deg) translateY(-140px); }
+        .sun-ray:nth-child(5) { transform: rotate(120deg) translateY(-140px); }
+        .sun-ray:nth-child(6) { transform: rotate(150deg) translateY(-140px); }
+        .sun-ray:nth-child(7) { transform: rotate(180deg) translateY(-140px); }
+        .sun-ray:nth-child(8) { transform: rotate(210deg) translateY(-140px); }
+        .sun-ray:nth-child(9) { transform: rotate(240deg) translateY(-140px); }
+        .sun-ray:nth-child(10) { transform: rotate(270deg) translateY(-140px); }
+        .sun-ray:nth-child(11) { transform: rotate(300deg) translateY(-140px); }
+        .sun-ray:nth-child(12) { transform: rotate(330deg) translateY(-140px); }
+        
+        @keyframes sunPulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 80px rgba(255, 200, 100, 0.8),
+                    0 0 150px rgba(255, 150, 50, 0.5),
+                    0 0 250px rgba(255, 100, 0, 0.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 100px rgba(255, 200, 100, 1),
+                    0 0 180px rgba(255, 150, 50, 0.7),
+                    0 0 300px rgba(255, 100, 0, 0.4);
+            }
+        }
+        
+        @keyframes sunFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes sunGlow {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+        
+        @keyframes rotateRays {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        @keyframes rayPulse {
+            0%, 100% { opacity: 0.5; height: 150px; }
+            50% { opacity: 0.8; height: 170px; }
+        }
+        
+        /* Birds in sky */
+        .bird {
+            position: absolute;
+            width: 20px;
+            height: 8px;
+            opacity: 0.6;
+            animation: birdFly 20s linear infinite;
+        }
+        
+        .bird::before, .bird::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 8px;
+            border: 2px solid #2d1810;
+            border-top: none;
+            border-radius: 0 0 50% 50%;
+        }
+        
+        .bird::before {
+            left: 0;
+            transform-origin: right center;
+            animation: birdWing 0.5s ease-in-out infinite;
+        }
+        
+        .bird::after {
+            right: 0;
+            transform-origin: left center;
+            animation: birdWing 0.5s ease-in-out infinite reverse;
+        }
+        
+        @keyframes birdFly {
+            0% { transform: translateX(-100px) translateY(0); }
+            25% { transform: translateX(25vw) translateY(20px); }
+            50% { transform: translateX(50vw) translateY(-10px); }
+            75% { transform: translateX(75vw) translateY(15px); }
+            100% { transform: translateX(120vw) translateY(0); }
+        }
+        
+        @keyframes birdWing {
+            0%, 100% { transform: rotate(-20deg); }
+            50% { transform: rotate(20deg); }
+        }
+        
+        /* Clouds */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 220, 180, 0.3);
+            border-radius: 50px;
+            animation: cloudFloat 30s linear infinite;
+        }
+        
+        .cloud::before, .cloud::after {
+            content: '';
+            position: absolute;
+            background: inherit;
+            border-radius: 50%;
+        }
+        
+        .cloud-1 {
+            width: 100px;
+            height: 30px;
+            top: 15%;
+            left: -100px;
+            animation-delay: 0s;
+        }
+        
+        .cloud-1::before {
+            width: 40px;
+            height: 40px;
+            top: -20px;
+            left: 15px;
+        }
+        
+        .cloud-1::after {
+            width: 30px;
+            height: 30px;
+            top: -15px;
+            left: 45px;
+        }
+        
+        .cloud-2 {
+            width: 80px;
+            height: 25px;
+            top: 25%;
+            left: -80px;
+            animation-delay: -15s;
+            animation-duration: 35s;
+        }
+        
+        .cloud-2::before {
+            width: 35px;
+            height: 35px;
+            top: -18px;
+            left: 10px;
+        }
+        
+        .cloud-2::after {
+            width: 25px;
+            height: 25px;
+            top: -12px;
+            left: 35px;
+        }
+        
+        @keyframes cloudFloat {
+            0% { transform: translateX(-200px); }
+            100% { transform: translateX(calc(100vw + 200px)); }
+        }
+        
+        /* Stars (for night part of gradient) */
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        
+        /* Wagon wheel decoration - improved */
+        .wagon-wheel {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 4px solid #3d2314;
+            border-radius: 50%;
+            opacity: 0.35;
+            animation: wheelRotate 20s linear infinite;
+        }
+        
+        .wagon-wheel::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #3d2314;
+            transform: translateY(-50%);
+        }
+        
+        .wagon-wheel::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #3d2314;
+            transform: translateX(-50%);
+        }
+        
+        /* Wheel spokes */
+        .wagon-wheel .spoke {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            top: 0;
+            left: 50%;
+            background: #3d2314;
+            transform-origin: center;
+        }
+        
+        .wagon-wheel .spoke:nth-child(1) { transform: translateX(-50%) rotate(0deg); }
+        .wagon-wheel .spoke:nth-child(2) { transform: translateX(-50%) rotate(45deg); }
+        .wagon-wheel .spoke:nth-child(3) { transform: translateX(-50%) rotate(90deg); }
+        .wagon-wheel .spoke:nth-child(4) { transform: translateX(-50%) rotate(135deg); }
+        
+        @keyframes wheelRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Boot print decoration */
+        .boot-print {
+            position: absolute;
+            width: 18px;
+            height: 28px;
+            border: 2px solid rgba(139, 69, 19, 0.25);
+            border-radius: 0 0 10px 10px;
+            opacity: 0.3;
+            transform: rotate(15deg);
+        }
+        
+        /* Mysterious Character Silhouettes - Ghostly Figures */
+        .mystery-char {
+            position: absolute;
+            bottom: 0;
+            opacity: 0;
+            animation: mysteryAppear 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        /* Character 1 - Hooded Figure */
+        .mystery-char-1 {
+            width: 30px;
+            height: 80px;
+            left: 8%;
+            bottom: 120px;
+            animation-delay: 0s;
+        }
+        
+        .mystery-char-1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 22px;
+            background: radial-gradient(ellipse at center, #1a0f08 60%, transparent 100%);
+            border-radius: 50% 50% 40% 40%;
+        }
+        
+        .mystery-char-1::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 0;
+            width: 100%;
+            height: 62px;
+            background: linear-gradient(180deg, #0d0804 0%, rgba(13, 8, 4, 0.7) 100%);
+            border-radius: 5px 5px 0 0;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+        }
+        
+        /* Character 2 - Tall Shadow */
+        .mystery-char-2 {
+            width: 25px;
+            height: 95px;
+            right: 15%;
+            bottom: 150px;
+            animation-delay: -2s;
+        }
+        
+        .mystery-char-2::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 18px;
+            height: 25px;
+            background: radial-gradient(ellipse at center, #151008 50%, transparent 100%);
+            border-radius: 50%;
+        }
+        
+        .mystery-char-2::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: -2px;
+            width: 29px;
+            height: 80px;
+            background: linear-gradient(180deg, #0a0604 0%, rgba(10, 6, 4, 0.6) 100%);
+            border-radius: 3px;
+        }
+        
+        /* Character 3 - Cowboy with Hat */
+        .mystery-char-3 {
+            width: 28px;
+            height: 75px;
+            left: 25%;
+            bottom: 100px;
+            animation-delay: -4s;
+        }
+        
+        .mystery-char-3::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -4px;
+            width: 36px;
+            height: 12px;
+            background: #1a0f08;
+            border-radius: 2px;
+        }
+        
+        .mystery-char-3::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 22px;
+            height: 20px;
+            background: radial-gradient(ellipse at center, #151008 70%, transparent 100%);
+            border-radius: 40% 40% 50% 50%;
+        }
+        
+        /* Character 4 - Small Figure */
+        .mystery-char-4 {
+            width: 20px;
+            height: 55px;
+            right: 30%;
+            bottom: 80px;
+            animation-delay: -1s;
+        }
+        
+        .mystery-char-4::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 16px;
+            background: radial-gradient(ellipse at center, #1a0f08 60%, transparent 100%);
+            border-radius: 50%;
+        }
+        
+        .mystery-char-4::after {
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: 0;
+            width: 100%;
+            height: 41px;
+            background: linear-gradient(180deg, #0d0804 0%, rgba(13, 8, 4, 0.5) 100%);
+            border-radius: 2px;
+        }
+        
+        /* Character 5 - Long Coat Figure */
+        .mystery-char-5 {
+            width: 35px;
+            height: 90px;
+            left: 45%;
+            bottom: 140px;
+            animation-delay: -3s;
+        }
+        
+        .mystery-char-5::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 20px;
+            background: radial-gradient(ellipse at center, #120a06 60%, transparent 100%);
+            border-radius: 45% 45% 50% 50%;
+        }
+        
+        .mystery-char-5::after {
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: -5px;
+            width: 45px;
+            height: 76px;
+            background: linear-gradient(180deg, #0a0503 0%, rgba(10, 5, 3, 0.6) 100%);
+            border-radius: 5px 5px 0 0;
+            clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 80% 100%, 70% 30%, 30% 30%, 20% 100%, 0% 100%);
+        }
+        
+        /* Character 6 - Sheriff/Marshal */
+        .mystery-char-6 {
+            width: 32px;
+            height: 85px;
+            right: 35%;
+            bottom: 130px;
+            animation-delay: -5s;
+        }
+        
+        .mystery-char-6::before {
+            content: '';
+            position: absolute;
+            top: -18px;
+            left: -2px;
+            width: 36px;
+            height: 14px;
+            background: #0d0804;
+            border-radius: 2px;
+        }
+        
+        .mystery-char-6::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 22px;
+            background: radial-gradient(ellipse at center, #151008 70%, transparent 100%);
+            border-radius: 40% 40% 45% 45%;
+        }
+        
+        .mystery-char-6 .body {
+            position: absolute;
+            top: 20px;
+            left: 2px;
+            width: 28px;
+            height: 65px;
+            background: linear-gradient(180deg, #0a0503 0%, rgba(10, 5, 3, 0.7) 100%);
+            border-radius: 3px;
+        }
+        
+        /* Mystery animation - fade in/out */
+        @keyframes mysteryAppear {
+            0% { opacity: 0; transform: translateY(5px); }
+            20% { opacity: 0.35; transform: translateY(0); }
+            80% { opacity: 0.35; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body class="text-[#e8dcc8] overflow-x-hidden min-h-screen western-bg">
+    <!-- Desert Scene Elements - Behind content -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" style="pointer-events: none;">
+        <!-- Stars (twinkling) -->
+        <div class="star" style="left: 5%; top: 5%; animation-delay: 0s;"></div>
+        <div class="star" style="left: 15%; top: 8%; animation-delay: 0.5s;"></div>
+        <div class="star" style="left: 25%; top: 3%; animation-delay: 1s;"></div>
+        <div class="star" style="left: 35%; top: 10%; animation-delay: 1.5s;"></div>
+        <div class="star" style="left: 45%; top: 6%; animation-delay: 2s;"></div>
+        <div class="star" style="left: 55%; top: 4%; animation-delay: 0.3s;"></div>
+        <div class="star" style="left: 65%; top: 9%; animation-delay: 0.8s;"></div>
+        <div class="star" style="left: 75%; top: 5%; animation-delay: 1.3s;"></div>
+        <div class="star" style="left: 85%; top: 7%; animation-delay: 1.8s;"></div>
+        <div class="star" style="left: 95%; top: 4%; animation-delay: 2.3s;"></div>
+        
+        <!-- Animated Clouds -->
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        
+        <!-- Birds -->
+        <div class="bird" style="top: 20%; animation-delay: 0s;"></div>
+        <div class="bird" style="top: 25%; animation-delay: -5s; transform: scale(0.7);"></div>
+        
+        <!-- Mountains with breathing animation -->
+        <div class="mountain mountain-1"></div>
+        <div class="mountain mountain-2"></div>
+        <div class="mountain mountain-3"></div>
+        <div class="mountain mountain-4"></div>
+        <div class="mountain mountain-5"></div>
+        
+        <!-- Desert Sun with rays -->
+        <div class="desert-sun">
+            <div class="sun-rays">
+                <div class="sun-ray"></div>
+                <div class="sun-ray"></div>
+                <div class="sun-ray"></div>
+                <div class="sun-ray"></div>
+                <div class="sun-ray"></div>
+                <div class="sun-ray"></div>
+                <div class="sun-ray"></div>
+                <div class="sun-ray"></div>
+                <div class="sun-ray"></div>
+                <div class="sun-ray"></div>
+                <div class="sun-ray"></div>
+                <div class="sun-ray"></div>
+            </div>
+        </div>
+        
+        <!-- Palm Trees -->
+        <div class="palm-tree" style="left: 3%; bottom: 0;">
+            <div class="palm-shadow"></div>
+            <div class="palm-trunk">
+                <div class="palm-fronds">
+                    <div class="palm-frond"></div>
+                    <div class="palm-frond"></div>
+                    <div class="palm-frond"></div>
+                    <div class="palm-frond"></div>
+                    <div class="palm-frond"></div>
+                    <div class="palm-frond"></div>
+                    <div class="palm-frond"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="palm-tree" style="right: 5%; bottom: 0; transform: scale(0.8); animation-delay: -2s;">
+            <div class="palm-shadow" style="width: 60px;"></div>
+            <div class="palm-trunk" style="height: 120px;">
+                <div class="palm-fronds">
+                    <div class="palm-frond"></div>
+                    <div class="palm-frond"></div>
+                    <div class="palm-frond"></div>
+                    <div class="palm-frond"></div>
+                    <div class="palm-frond"></div>
+                    <div class="palm-frond"></div>
+                    <div class="palm-frond"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cacti -->
+        <div class="cactus" style="left: 8%; bottom: 0;"></div>
+        <div class="cactus" style="right: 12%; bottom: 0; height: 80px; animation-delay: -1s;"></div>
+        <div class="cactus" style="right: 28%; bottom: 0; height: 60px; width: 25px; animation-delay: -3s;"></div>
+        
+        <!-- Cowboy silhouettes -->
+        <div class="cowboy" style="left: 12%;"></div>
+        <div class="cowboy" style="right: 18%; transform: scaleX(-1); animation-delay: -5s;"></div>
+        
+        <!-- Wagon wheels -->
+        <div class="wagon-wheel" style="left: 5%; bottom: 120px; transform: rotate(10deg);">
+            <div class="spoke"></div>
+            <div class="spoke"></div>
+            <div class="spoke"></div>
+            <div class="spoke"></div>
+        </div>
+        <div class="wagon-wheel" style="right: 15%; bottom: 150px; transform: rotate(-5deg) scale(0.8);">
+            <div class="spoke"></div>
+            <div class="spoke"></div>
+            <div class="spoke"></div>
+            <div class="spoke"></div>
+        </div>
+        
+        <!-- Boot prints -->
+        <div class="boot-print" style="left: 25%; bottom: 180px;"></div>
+        <div class="boot-print" style="left: 30%; bottom: 160px;"></div>
+        <div class="boot-print" style="right: 30%; bottom: 200px;"></div>
+        
+        <!-- Heat shimmer -->
+        <div class="heat-shimmer"></div>
+        
+        <!-- Fireflies -->
+        <div class="firefly" style="left: 20%; bottom: 30%; animation-delay: 0s;"></div>
+        <div class="firefly" style="left: 40%; bottom: 40%; animation-delay: -1s;"></div>
+        <div class="firefly" style="left: 60%; bottom: 35%; animation-delay: -2s;"></div>
+        <div class="firefly" style="left: 80%; bottom: 45%; animation-delay: -3s;"></div>
+        
+        <!-- Mysterious Characters -->
+        <div class="mystery-char mystery-char-1"></div>
+        <div class="mystery-char mystery-char-2"></div>
+        <div class="mystery-char mystery-char-3"></div>
+        <div class="mystery-char mystery-char-4"></div>
+        <div class="mystery-char mystery-char-5"></div>
+        <div class="mystery-char mystery-char-6">
+            <div class="body"></div>
+        </div>
+    </div>
+    
+    <div id="sand-particles" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+    
+    <!-- Wind-blown sand -->
+    <div id="wind-sand" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+    
+    <!-- Canvas for confetti -->
+    <canvas id="confetti-canvas"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-effect border-b-2 border-[#8b4513] transition-all duration-300" id="navbar" style="height: 80px;">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8" style="height: 100%;">
+            <div class="flex justify-between items-center h-full">
+                <div class="flex items-center space-x-2 sm:space-x-3 cursor-pointer magnetic" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <img src="./dika studios main logo.png" alt="DikaStudios Logo" class="h-32 w-auto object-contain group-hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+                    <a href="#features" class="text-[#f4a460] hover:text-[#e8dcc8] transition-colors magnetic relative group font-semibold text-sm lg:text-base">
+                        Features
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#f4a460] transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#video" class="text-[#f4a460] hover:text-[#e8dcc8] transition-colors magnetic relative group font-semibold text-sm lg:text-base">
+                        Demo
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#f4a460] transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#preorder" class="px-4 lg:px-6 py-2 bg-gradient-to-r from-[#8b4513] to-[#cd853f] hover:from-[#a0522d] hover:to-[#f4a460] text-white rounded-full font-bold transition-all transform hover:scale-105 btn-lift magnetic shadow-lg hover:shadow-xl border border-[#f4a460] text-sm lg:text-base">
+                        Pre-Order Now
+                    </a>
+                </div>
+                <button class="md:hidden text-[#f4a460] magnetic p-2" onclick="toggleMobileMenu()">
+                    <i data-lucide="menu" class="w-6 h-6 sm:w-8 sm:h-8"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden glass-effect border-t-2 border-[#8b4513] transform origin-top transition-all duration-300 absolute top-full left-0 right-0">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#features" class="block px-3 py-3 text-[#f4a460] hover:text-[#e8dcc8] hover:bg-[#8b4513]/30 rounded-lg transition-all font-semibold">Features</a>
+                <a href="#video" class="block px-3 py-3 text-[#f4a460] hover:text-[#e8dcc8] hover:bg-[#8b4513]/30 rounded-lg transition-all font-semibold">Demo</a>
+                <a href="#preorder" class="block px-3 py-3 text-[#f4a460] font-bold hover:bg-[#8b4513]/30 rounded-lg transition-all">Pre-Order Now</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="relative pt-28 sm:pt-36 md:pt-40 lg:pt-44 pb-12 sm:pb-16 md:pb-20 lg:pb-32 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+            <div class="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-[#cd853f]/20 rounded-full blur-3xl float-animation"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-[#8b4513]/20 rounded-full blur-3xl float-animation" style="animation-delay: 3s;"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative z-10">
+            <!-- Resource Badges -->
+            <div class="flex justify-center gap-2 sm:gap-3 md:gap-4 mb-6 sm:mb-8 reveal">
+                <div class="resource-badge px-2 sm:px-3 md:px-4 py-1 sm:py-2 rounded-full flex items-center gap-1 sm:gap-2">
+                    <i data-lucide="trees" class="w-4 h-4 sm:w-5 sm:h-5 text-[#8b4513]"></i>
+                    <span class="text-xs sm:text-sm text-[#e8dcc8] font-semibold">Wood</span>
+                </div>
+                <div class="resource-badge px-2 sm:px-3 md:px-4 py-1 sm:py-2 rounded-full flex items-center gap-1 sm:gap-2">
+                    <i data-lucide="waves" class="w-4 h-4 sm:w-5 sm:h-5 text-[#5cb3cc]"></i>
+                    <span class="text-xs sm:text-sm text-[#e8dcc8] font-semibold">Water</span>
+                </div>
+                <div class="resource-badge px-2 sm:px-3 md:px-4 py-1 sm:py-2 rounded-full flex items-center gap-1 sm:gap-2">
+                    <i data-lucide="drumstick" class="w-4 h-4 sm:w-5 sm:h-5 text-[#a44]"></i>
+                    <span class="text-xs sm:text-sm text-[#e8dcc8] font-semibold">Meat</span>
+                </div>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
+                <!-- Content -->
+                <div class="space-y-4 sm:space-y-6 animate-fade-in reveal order-2 lg:order-1">
+                    <div class="inline-flex items-center space-x-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#8b4513]/50 border border-[#cd853f] text-[#f4a460] text-xs sm:text-sm font-medium hover:scale-105 transition-transform cursor-default">
+                        <span class="w-2 h-2 bg-[#f4a460] rounded-full animate-pulse"></span>
+                        <span class="whitespace-nowrap">Limited Early Bird Pricing</span>
+                    </div>
+                    <div class="cursor-pointer border-2 border-transparent hover:border-blue-500 rounded-lg transition">
+                        <img src="./topcover.png" alt="Game Board" class="thumbnail w-full h-full object-cover rounded-lg" onclick="changeMainImage(this)">
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-bold leading-tight text-[#e8dcc8] reveal western-title">
+                        The Future of Hybrid board games is <br>
+                        <span class="gradient-text">Here!</span>
+                    </h1>
+                    <p class="text-sm sm:text-base md:text-xl text-[#cd853f] leading-relaxed max-w-xl reveal">
+Embark on a magical journey through enchanted lands in this award-winning board game. Perfect for families and friends, The Rivals combines strategy, adventure, and teamwork in an exciting package that keeps players coming back for more.                    </p>
+                    <div class="flex flex-wrap gap-3 sm:gap-4 items-center reveal stagger-children">
+                        <div class="flex items-center space-x-2 text-[#cd853f]">
+                            <i data-lucide="truck" class="w-4 h-4 sm:w-5 sm:h-5 text-[#f4a460]"></i>
+                            <span class="text-sm">Free Delivery</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 sm:gap-4 reveal">
+                        <span class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#f4a460] price-bounce western-title">$44.00</span>
+                        <span class="text-sm sm:text-xl text-[#cd853f]/60 line-through">$49.99</span>
+                        <span class="px-2 sm:px-3 py-1 bg-[#8b4513]/50 text-[#f4a460] text-xs sm:text-sm font-semibold rounded-full animate-pulse border border-[#cd853f]">12% OFF</span>
+                    </div>
+                    <div class="reveal">
+                        <a href="#preorder" class="inline-block px-5 sm:px-6 md:px-8 py-3 sm:py-3 md:py-4 bg-gradient-to-r from-[#8b4513] to-[#cd853f] text-white rounded-full font-bold text-sm sm:text-base md:text-lg btn-lift shadow-lg hover:shadow-2xl border-2 border-[#f4a460]">
+                            Pre-Order Now <i data-lucide="arrow-right" class="inline-block w-4 h-4 sm:w-5 sm:h-5 ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Video Section -->
+                <div id="video" class="relative reveal order-1 lg:order-2">
+                    <!-- Board Game Icons Above Video -->
+                    <div class="flex justify-center gap-3 sm:gap-4 mb-4 sm:mb-6 stagger-children">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#8b4513]/50 flex items-center justify-center icon-bounce glass-effect float-animation border border-[#cd853f]">
+                            <i data-lucide="dices" class="w-5 h-5 sm:w-6 sm:h-6 text-[#f4a460]"></i>
+                        </div>
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#8b4513]/50 flex items-center justify-center icon-bounce glass-effect float-animation border border-[#cd853f]" style="animation-delay: 1s;">
+                            <i data-lucide="puzzle" class="w-5 h-5 sm:w-6 sm:h-6 text-[#f4a460]"></i>
+                        </div>
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#8b4513]/50 flex items-center justify-center icon-bounce glass-effect float-animation border border-[#cd853f]" style="animation-delay: 2s;">
+                            <i data-lucide="trophy" class="w-5 h-5 sm:w-6 sm:h-6 text-[#f4a460]"></i>
+                        </div>
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#8b4513]/50 flex items-center justify-center icon-bounce glass-effect float-animation border border-[#cd853f]" style="animation-delay: 0.5s;">
+                            <i data-lucide="target" class="w-5 h-5 sm:w-6 sm:h-6 text-[#f4a460]"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="video-container rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border-2 sm:border-4 border-[#8b4513] aspect-video relative group cursor-pointer tilt-card" onclick="playVideo()" id="videoCard">
+                        <!-- Thumbnail -->
+                        <img src="" alt="Product Preview" class="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-300">
+                        <!-- Overlay -->
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-all duration-300">
+                            <div class="play-button w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-gradient-to-r from-[#8b4513] to-[#cd853f] rounded-full flex items-center justify-center pulse-ring tilt-content border-2 border-[#f4a460]">
+                                <i data-lucide="play" class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white ml-0.5 sm:ml-1"></i>
+                            </div>
+                        </div>
+                        <!-- Video Label -->
+                        <div class="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 bg-[#3d2314]/90 backdrop-blur-sm px-2 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-medium flex items-center space-x-1 sm:space-x-2 text-[#e8dcc8] transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 border border-[#8b4513]">
+                            <i data-lucide="film" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+                            <span>Watch Product Demo</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Board Game Specs Below Video -->
+                    <div class="mt-4 sm:mt-6 grid grid-cols-3 gap-2 sm:gap-3 stagger-children">
+                        <div class="glass-effect rounded-lg sm:rounded-xl p-2 sm:p-3 text-center hover:bg-[#3d2314]/80 transition-colors group border border-[#8b4513]">
+                            <i data-lucide="users" class="w-4 h-4 sm:w-5 sm:h-5 mx-auto mb-1 text-[#f4a460] icon-bounce"></i>
+                            <p class="text-xs font-semibold text-[#e8dcc8]">3-6 Players</p>
+                        </div>
+                        <div class="glass-effect rounded-lg sm:rounded-xl p-2 sm:p-3 text-center hover:bg-[#3d2314]/80 transition-colors group border border-[#8b4513]">
+                            <i data-lucide="clock" class="w-4 h-4 sm:w-5 sm:h-5 mx-auto mb-1 text-[#f4a460] icon-bounce"></i>
+                            <p class="text-xs font-semibold text-[#e8dcc8]">1-5 hours</p>
+                        </div>
+                        <div class="glass-effect rounded-lg sm:rounded-xl p-2 sm:p-3 text-center hover:bg-[#3d2314]/80 transition-colors group border border-[#8b4513]">
+                            <i data-lucide="star" class="w-4 h-4 sm:w-5 sm:h-5 mx-auto mb-1 text-[#f4a460] icon-bounce"></i>
+                            <p class="text-xs font-semibold text-[#e8dcc8]">Ages 12+</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Video Modal -->
+                    <div id="videoModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-sm p-2 sm:p-4 opacity-0 transition-opacity duration-300" onclick="closeVideo(event)">
+                        <div class="relative w-full max-w-5xl aspect-video bg-black rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border-2 sm:border-4 border-[#8b4513] transform scale-95 transition-transform duration-300" id="videoModalContent">
+                            <button onclick="closeVideo()" class="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 w-8 h-8 sm:w-10 sm:h-10 bg-[#8b4513] hover:bg-[#a0522d] rounded-full flex items-center justify-center transition-colors btn-lift">
+                                <i data-lucide="x" class="w-4 h-4 sm:w-5 sm:h-5 text-white"></i>
+                            </button>
+                            <video id="productVideo" class="w-full h-full" controls poster="">
+                                <source src="" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Grid -->
+    <section id="features" class="py-20 bg-[#2d1810]/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 stagger-children" id="featuresGrid">
+                <div class="glass-effect p-8 rounded-2xl hover:bg-[#3d2314]/80 transition-all duration-300 group tilt-card cursor-pointer border-2 border-[#8b4513]">
+                    <div class="flex items-center justify-center mb-4 icon-bounce">
+                        <div class="w-16 h-16 bg-[#8b4513]/30 rounded-2xl flex items-center justify-center group-hover:bg-[#8b4513]/50 transition-colors border border-[#cd853f]">
+                            <i data-lucide="trees" class="w-8 h-8 text-[#f4a460]"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#e8dcc8] group-hover:text-[#f4a460] transition-colors">Resource Management</h3>
+                    <p class="text-[#cd853f]">Gather wood, water, meat to build your faction.</p>
+                </div>
+                <div class="glass-effect p-8 rounded-2xl hover:bg-[#3d2314]/80 transition-all duration-300 group tilt-card cursor-pointer border-2 border-[#8b4513]">
+                    <div class="flex items-center justify-center mb-4 icon-bounce">
+                        <div class="w-16 h-16 bg-[#8b4513]/30 rounded-2xl flex items-center justify-center group-hover:bg-[#8b4513]/50 transition-colors border border-[#cd853f]">
+                            <i data-lucide="users" class="w-8 h-8 text-[#f4a460]"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#e8dcc8] group-hover:text-[#f4a460] transition-colors">Social Skills</h3>
+                    <p class="text-[#cd853f]">Encourages teamwork and communication.</p>
+                </div>
+                <div class="glass-effect p-8 rounded-2xl hover:bg-[#3d2314]/80 transition-all duration-300 group tilt-card cursor-pointer border-2 border-[#8b4513]">
+                    <div class="flex items-center justify-center mb-4 icon-bounce">
+                        <div class="w-16 h-16 bg-[#8b4513]/30 rounded-2xl flex items-center justify-center group-hover:bg-[#8b4513]/50 transition-colors border border-[#cd853f]">
+                            <i data-lucide="swords" class="w-8 h-8 text-[#f4a460]"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#e8dcc8] group-hover:text-[#f4a460] transition-colors">Epic Battles</h3>
+                    <p class="text-[#cd853f]">Face off against rival factions in strategic combat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pre-Order Section -->
+    <section id="preorder" class="py-20 relative desert-floor">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-4xl font-bold mb-4 text-[#e8dcc8] western-title">Secure Your GameBoard</h2>
+                <p class="text-[#cd853f] text-lg">Join the early pioneers. Limited quantities available for pre-order!</p>
+            </div>
+            <div class="glass-effect rounded-3xl p-8 md:p-12 border-2 border-[#8b4513] form-glow reveal" id="formContainer">
+                <!-- Customer Info -->
+                <form id="checkout-form" action="https://formspree.io/f/xpwqrnwq" method="POST" class="space-y-4 wanted-paper p-6 rounded-lg shadow-lg">
+                    <!-- Anti-spam honeypot -->
+                    <input type="text" name="_gotcha" style="display:none">
+                    <h2 class="text-xl font-bold mb-4 text-[#3d2314] flex items-center western-title">
+                        <i data-lucide="user" class="w-5 h-5 mr-2"></i> Customer Information
+                    </h2>
+                    <input type="text" name="name" placeholder="Full Name" pattern="[A-Za-z\s]{3,50}" required class="w-full p-3 border-2 border-[#8b4513] rounded input-animated">
+                    <!-- PHONE -->
+                    <div class="flex gap-2 mt-2">
+                        <select id="countryCode" name="country_code" required class="p-3 border-2 border-[#8b4513] rounded w-1/3 input-animated">
+                            <option value="">Code</option>
+                            <option value="+961">🇱🇧 +961</option>
+                            <option value="+963">🇸🇾 +963</option>
+                            <option value="+974">🇶🇦 +974</option>
+                            <option value="+1">🇺🇸 +1</option>
+                        </select>
+                        <input id="phoneInput" type="tel" name="phone" required inputmode="numeric" placeholder="Phone Number" class="w-2/3 p-3 border-2 border-[#8b4513] rounded input-animated">
+                    </div>
+                    <p id="phoneError" class="text-red-400 text-sm mt-1 hidden"></p>
+                    <!-- EMAIL -->
+                    <div class="mt-4">
+                        <input id="emailInput" type="email" name="email" required placeholder="example@email.com" class="w-full p-3 border-2 border-[#8b4513] rounded input-animated">
+                        <p id="emailError" class="text-red-400 text-sm mt-1 hidden"></p>
+                    </div>
+                    <input type="hidden" name="payment_method" id="paymentMethodInput">
+                    <button id="submitBtn" type="submit" class="w-full bg-gradient-to-r from-[#8b4513] to-[#cd853f] text-white p-3 rounded hover:from-[#a0522d] hover:to-[#f4a460] transition mt-4 btn-lift font-bold disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden border-2 border-[#f4a460]" disabled>
+                        <span class="relative z-10 flex items-center justify-center">
+                            Complete Order <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
+                        </span>
+                        <div class="shimmer absolute inset-0 opacity-0 transition-opacity duration-300" id="submitShimmer"></div>
+                    </button>
+                </form>
+                
+                <!-- PAYMENT METHODS & SUBMIT -->
+                <div class="space-y-4 mt-6">
+                    <label class="block text-sm font-medium text-[#cd853f] mb-3 flex items-center">
+                        <i data-lucide="credit-card" class="w-4 h-4 mr-2"></i> Select Payment Method
+                    </label>
+                    <!-- PayPal -->
+                    <button type="button" onclick="selectPayment('paypal', this)" class="payment-card w-full p-4 rounded-xl flex items-center justify-between group tilt-card">
+                        <div class="flex items-center space-x-4 tilt-content">
+                            <div class="w-12 h-12 bg-gradient-to-r from-[#8b4513] to-[#cd853f] rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i data-lucide="credit-card" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <div class="text-left">
+                                <p class="font-semibold text-[#e8dcc8] group-hover:text-[#f4a460] transition-colors">Pay by card</p>
+                                <p class="text-sm text-[#cd853f]">Secure payment</p>
+                                <span class="ml-2 flex gap-2 items-center mt-1">
+                                    <img src="./visa.jpg" class="h-5 rounded shadow-sm">
+                                    <img src="./mastercard.jpeg" class="h-5 rounded shadow-sm">
+                                    <img src="./paypal.png" class="h-5 rounded shadow-sm">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-[#cd853f] group-hover:text-[#f4a460] group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </button>
+                    <!-- WishMoney -->
+                    <button type="button" onclick="selectPayment('wishmoney', this)" class="payment-card w-full p-4 rounded-xl flex items-center justify-between group tilt-card">
+                        <div class="flex items-center space-x-4 tilt-content">
+                            <div class="w-12 h-12 bg-gradient-to-br from-[#8b4513] to-[#cd853f] rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i data-lucide="wallet" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <div class="text-left">
+                                <p class="font-semibold text-[#e8dcc8] group-hover:text-[#f4a460] transition-colors">WishMoney</p>
+                                <p class="text-sm text-[#cd853f]">Fast & secure digital wallet</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-[#cd853f] group-hover:text-[#f4a460] group-hover:translate-x-1 transition-all"></i>
+                        </div>
+                    </button>
+                </div>
+                
+                <!-- Trust Badges -->
+                <div class="mt-8 pt-8 border-t-2 border-[#8b4513] flex flex-wrap justify-center gap-6 text-[#cd853f] text-sm stagger-children">
+                    <div class="flex items-center space-x-2 hover:text-[#f4a460] transition-colors">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i>
+                        <span>Payment Secured</span>
+                    </div>
+                    <span>"Orders are processed after payment confirmation. Delivery will be arranged once payment is verified."</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-[#2d1810]/90 border-t-2 border-[#8b4513] py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-3 mb-4 md:mb-0 group cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <img src="./dika studios main logo.png" alt="DikaStudios Logo" class="h-32 w-auto object-contain group-hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="text-[#cd853f] text-sm hover:text-[#f4a460] transition-colors">
+                    © 2024 DikaStudios:GameVerse. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Cash Modal -->
+    <div id="cashModal" class="fixed inset-0 hidden items-center justify-center bg-black/70 z-50">
+        <div class="wanted-paper rounded-2xl p-8 max-w-md text-center transform scale-95 opacity-0 transition-all duration-300" id="cashModalContent">
+            <div class="w-16 h-16 bg-[#8b4513]/30 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-[#8b4513]">
+                <i data-lucide="wallet" class="w-8 h-8 text-[#8b4513]"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-4 text-[#3d2314] western-title">Wish Money Payment</h3>
+            <p id="cashText" class="mb-6 text-[#5c3a24]"></p>
+            <button onclick="closeCashModal()" class="px-6 py-2 bg-gradient-to-r from-[#8b4513] to-[#cd853f] text-white rounded-lg btn-lift font-bold">
+                OK
+            </button>
+        </div>
+    </div>
+    
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-4 right-4 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+        <div class="glass-effect border-2 border-[#8b4513] rounded-lg shadow-2xl p-4 flex items-center space-x-3">
+            <div id="toastIcon" class="w-8 h-8 rounded-full flex items-center justify-center bg-[#8b4513]/30">
+                <i data-lucide="check" class="w-5 h-5 text-[#f4a460]"></i>
+            </div>
+            <div>
+                <p id="toastTitle" class="font-semibold text-[#e8dcc8]">Success</p>
+                <p id="toastMessage" class="text-sm text-[#cd853f]">Operation completed successfully</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Global Variables
+        let selectedPayment = null;
+        
+        // Elements
+        const form = document.getElementById("checkout-form");
+        const phoneInput = document.getElementById("phoneInput");
+        const emailInput = document.getElementById("emailInput");
+        const countrySelect = document.getElementById("countryCode");
+        const phoneError = document.getElementById("phoneError");
+        const emailError = document.getElementById("emailError");
+        const submitBtn = document.getElementById("submitBtn");
+        
+        // Country Phone Rules
+        const rules = {
+            "+961": { mobileCheck: v => /^[3-9]\d{6,7}$/.test(v), error: "Lebanon numbers must start with 3–9 and be 7–8 digits" },
+            "+963": { mobileCheck: v => /^9\d{8}$/.test(v), error: "Syria numbers must start with 9 and be 9 digits" },
+            "+974": { mobileCheck: v => /^[3567]\d{7}$/.test(v), error: "Qatar numbers must start with 3,5,6,7 and be 8 digits" },
+            "+1":   { mobileCheck: v => /^[2-9]\d{9}$/.test(v), error: "US numbers must be 10 digits and start with 2–9" }
+        };
+        
+        // Input Validation
+        function validateInputs() {
+            let phone = phoneInput.value.replace(/\D/g, '');
+            const countryRule = rules[countrySelect.value];
+            let phoneValid = false;
+            
+            // Phone Validation
+            if (countryRule) {
+                if (phone.startsWith("0")) phone = phone.slice(1);
+                phoneValid = countryRule.mobileCheck(phone);
+                if (!phoneValid) {
+                    phoneError.textContent = countryRule.error;
+                    phoneError.classList.remove("hidden");
+                    phoneInput.style.borderColor = '#ef4444';
+                    phoneInput.classList.add("shake");
+                    setTimeout(() => phoneInput.classList.remove("shake"), 500);
+                    phoneInput.setCustomValidity("Invalid phone number");
+                } else {
+                    phoneError.classList.add("hidden");
+                    phoneInput.style.borderColor = '#8b4513';
+                    phoneInput.setCustomValidity("");
+                }
+            } else {
+                phoneValid = false;
+                phoneError.textContent = "Please select a country code";
+                phoneError.classList.remove("hidden");
+                phoneInput.style.borderColor = '#ef4444';
+            }
+            
+            // Email Validation
+            const email = emailInput.value.trim().toLowerCase();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+            const blockedDomains = ["mailinator.com", "tempmail.com", "10minutemail.com", "guerrillamail.com", "yopmail.com"];
+            let emailValid = false;
+            
+            if (!emailPattern.test(email)) {
+                emailError.textContent = "Please enter a valid email format";
+                emailValid = false;
+                emailInput.style.borderColor = '#ef4444';
+            } else if (blockedDomains.some(domain => email.endsWith(domain))) {
+                emailError.textContent = "Temporary emails are not allowed";
+                emailValid = false;
+                emailInput.style.borderColor = '#ef4444';
+                emailInput.classList.add("shake");
+                setTimeout(() => emailInput.classList.remove("shake"), 500);
+            } else if (/^(.)\1+$/.test(email.split("@")[0])) {
+                emailError.textContent = "Invalid email username";
+                emailValid = false;
+                emailInput.style.borderColor = '#ef4444';
+            } else if (/^(test|admin|info|qwerty|asdf)/.test(email)) {
+                emailError.textContent = "Suspicious email detected";
+                emailValid = false;
+                emailInput.style.borderColor = '#ef4444';
+            } else {
+                emailValid = true;
+                emailInput.style.borderColor = '#8b4513';
+            }
+            
+            if (!emailValid) {
+                emailError.classList.remove("hidden");
+                emailInput.setCustomValidity("Invalid email");
+            } else {
+                emailError.classList.add("hidden");
+                emailInput.setCustomValidity("");
+            }
+            
+            // Final Submit Check
+            const formValid = phoneValid && emailValid && selectedPayment;
+            submitBtn.disabled = !formValid;
+            if (formValid) {
+                submitBtn.classList.remove("opacity-50", "cursor-not-allowed");
+                submitBtn.classList.add("hover:scale-[1.02]");
+            }
+            return formValid;
+        }
+        
+        // Payment Selection
+        function selectPayment(method, button) {
+            selectedPayment = method;
+            document.querySelectorAll('.payment-card').forEach(card => {
+                card.classList.remove('border-2', 'border-[#f4a460]', 'bg-[#cd853f]/10');
+                card.style.transform = 'scale(1)';
+            });
+            button.classList.add('border-2', 'border-[#f4a460]', 'bg-[#cd853f]/10');
+            button.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.02)' }, { transform: 'scale(1)' }], { duration: 300, easing: 'ease-out' });
+            validateInputs();
+            showToast("Selected", `${method === 'paypal' ? 'Card/PayPal' : 'WishMoney'} selected as payment method`, "info");
+        }
+        
+        // Form Submission
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            const isValid = validateInputs();
+            if(!isValid){
+                showToast("Error", "Please fix the errors before submitting.", "error");
+                form.classList.add("shake");
+                setTimeout(() => form.classList.remove("shake"), 500);
+                return;
+            }
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="flex items-center justify-center"><i data-lucide="loader-2" class="w-5 h-5 mr-2 animate-spin"></i> Processing...</span>';
+            lucide.createIcons();
+            
+            const paymentInput = document.getElementById('paymentMethodInput');
+            paymentInput.value = selectedPayment;
+            const formData = new FormData(form);
+            
+            fetch(form.action, { method: form.method, body: formData, headers: { 'Accept': 'application/json' } })
+            .then(async response => {
+                if(response.ok){
+                    showToast("Success","Form submitted successfully","success");
+                    fireConfetti();
+                    if(selectedPayment === 'paypal'){
+                        const PAYPAL_LINK = "https://www.paypal.com/ncp/payment/D44FKGUPSYZG2";
+                        setTimeout(() => window.location.href = PAYPAL_LINK, 1200);
+                    } else if(selectedPayment === 'wishmoney'){
+                        const cashModal = document.getElementById('cashModal');
+                        const cashModalContent = document.getElementById('cashModalContent');
+                        document.getElementById('cashText').textContent = `Please visit the nearest Wish Money store or pay by whish money card the total amount 44.00$.`;
+                        cashModal.classList.remove('hidden');
+                        cashModal.classList.add('flex');
+                        setTimeout(() => {
+                            cashModalContent.classList.remove('scale-95', 'opacity-0');
+                            cashModalContent.classList.add('scale-100', 'opacity-100');
+                        }, 10);
+                        cashModal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        setTimeout(() => {
+                            cashModalContent.classList.add('scale-95', 'opacity-0');
+                            cashModalContent.classList.remove('scale-100', 'opacity-100');
+                            setTimeout(() => { cashModal.classList.add('hidden'); cashModal.classList.remove('flex'); }, 300);
+                        }, 8000);
+                    }
+                } else {
+                    let errorMsg = "Form submission failed";
+                    try { const data = await response.json(); if(data && data.error) errorMsg = data.error; } catch(err){}
+                    showToast("Error", errorMsg, "error");
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<span class="relative z-10 flex items-center justify-center">Complete Order <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i></span>';
+                    lucide.createIcons();
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                showToast("Error","Form submission failed","error");
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span class="relative z-10 flex items-center justify-center">Complete Order <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i></span>';
+                lucide.createIcons();
+            });
+        });
+        
+        // Modals & Toast
+        function closeCashModal() {
+            const cashModal = document.getElementById('cashModal');
+            const cashModalContent = document.getElementById('cashModalContent');
+            cashModalContent.classList.add('scale-95', 'opacity-0');
+            cashModalContent.classList.remove('scale-100', 'opacity-100');
+            setTimeout(() => { cashModal.classList.add('hidden'); cashModal.classList.remove('flex'); }, 300);
+        }
+        
+        function showToast(title, message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastTitle = document.getElementById('toastTitle');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+            toastTitle.textContent = title;
+            toastMessage.textContent = message;
+            let iconName = 'check';
+            let bgColor = 'bg-green-500/20';
+            if(type === 'error') { iconName = 'alert-circle'; bgColor = 'bg-red-500/20'; }
+            if(type === 'info') { iconName = 'info'; bgColor = 'bg-blue-500/20'; }
+            toastIcon.innerHTML = `<i data-lucide="${iconName}" class="w-5 h-5 text-[#f4a460]"></i>`;
+            toastIcon.className = `w-8 h-8 rounded-full flex items-center justify-center ${bgColor}`;
+            toast.classList.remove('translate-y-20','opacity-0');
+            if(typeof lucide!=='undefined') lucide.createIcons();
+            setTimeout(()=> toast.classList.add('translate-y-20','opacity-0'), 3000);
+        }
+        
+        function toggleMobileMenu() {
+            const menu = document.getElementById("mobileMenu");
+            menu.classList.toggle("hidden");
+            if (!menu.classList.contains("hidden")) menu.classList.add("animate-fade-in");
+        }
+        
+        document.querySelectorAll("#mobileMenu a").forEach(link => {
+            link.addEventListener("click", () => { document.getElementById("mobileMenu").classList.add("hidden"); });
+        });
+        
+        // Events
+        phoneInput.addEventListener("input", validateInputs);
+        emailInput.addEventListener("input", validateInputs);
+        countrySelect.addEventListener("change", () => { phoneInput.value=""; validateInputs(); });
+        
+        // ===============================
+        // ANIMATION ENHANCEMENTS
+        // ===============================
+        
+        // Scroll Reveal Observer
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    if (entry.target.classList.contains('stagger-children')) entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.reveal, .stagger-children').forEach(el => { observer.observe(el); });
+        
+        // 3D Tilt Effect for Cards
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
+        });
+        
+        // Magnetic Button Effect
+        document.querySelectorAll('.magnetic').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+            });
+            btn.addEventListener('mouseleave', () => { btn.style.transform = 'translate(0, 0)'; });
+        });
+        
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) nav.classList.add('nav-scrolled');
+            else nav.classList.remove('nav-scrolled');
+        });
+        
+        // Create Sand Particles - Enhanced
+        function createSandParticles() {
+            const container = document.getElementById('sand-particles');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'sand-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 8 + 8) + 's';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.width = (Math.random() * 2 + 1) + 'px';
+                particle.style.height = particle.style.width;
+                container.appendChild(particle);
+            }
+        }
+        createSandParticles();
+        
+        // Create Wind-Blown Sand
+        function createWindSand() {
+            const container = document.getElementById('wind-sand');
+            for (let i = 0; i < 10; i++) {
+                const sand = document.createElement('div');
+                sand.className = 'wind-sand';
+                sand.style.top = (Math.random() * 60 + 20) + '%';
+                sand.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                sand.style.animationDelay = Math.random() * 6 + 's';
+                container.appendChild(sand);
+            }
+        }
+        createWindSand();
+        
+        // Confetti Effect
+        function fireConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const particles = [];
+            const colors = ['#8b4513', '#cd853f', '#f4a460', '#deb887', '#a0522d'];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: canvas.width / 2,
+                    y: canvas.height / 2,
+                    vx: (Math.random() - 0.5) * 20,
+                    vy: (Math.random() - 0.5) * 20 - 5,
+                    life: 100,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    size: Math.random() * 8 + 4
+                });
+            }
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach((p, index) => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.5;
+                    p.life--;
+                    p.size *= 0.98;
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    if (p.life <= 0) particles.splice(index, 1);
+                });
+                if (particles.length > 0) requestAnimationFrame(animate);
+                else ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            animate();
+        }
+        
+        // Video Modal Functions
+        function playVideo() {
+            const modal = document.getElementById('videoModal');
+            const modalContent = document.getElementById('videoModalContent');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        }
+        
+        function closeVideo(event) {
+            if (event && event.target !== event.currentTarget) return;
+            const modal = document.getElementById('videoModal');
+            const modalContent = document.getElementById('videoModalContent');
+            const video = document.getElementById('productVideo');
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                video.pause();
+            }, 300);
+        }
+        
+        // Initialize icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
